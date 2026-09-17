@@ -16,7 +16,7 @@
 
 % Title and author info (from the GCB abstract)
 \titlestart{A universal toolkit}% first words in faculty colour
-\titleend{ for single-cell and spatial long-read transcriptomic sequencing data}
+\titleend{ for single-cell\\ and spatial long-read transcriptomic\\ sequencing data}
 \titlesize{\Huge}
 
 \author{
@@ -48,14 +48,207 @@
 
 \section{Introduction}
 \justifying
-Placeholder.
+Single-cell and spatial transcriptomics combined with long-read sequencing
+enable isoform-level expression profiling and the study of alternative
+splicing. However, processing such data poses distinct algorithmic
+challenges: error-prone reads, extremely large barcode whitelists, molecule
+concatenation artifacts and PCR duplicates, as well as a lack of methods for
+detecting spatially variable isoforms. Here we present
+\textbf{IsoQuant4}~\cite{prjibelski2023} --- a universal toolkit for
+processing long-read RNA-seq data obtained with various protocols ---
+complemented by \textbf{Spl-IsoFind}~\cite{michielsen2026}, which discovers
+spatially variable isoforms.
+
+\section{Key features}
+\justifying
+\begin{itemize}
+  \item Gene, transcript, exon and splice junction quantification for bulk,
+        single-cell and spatial long-read data (PacBio and ONT);
+  \item Reference-based and \textit{de novo} transcript discovery;
+  \item High-precision barcode calling for 10x single-cell, Visium and
+        Visium HD, Curio and Stereo-seq;
+  \item Universal barcode calling for any custom protocol via a
+        user-specified molecule description format;
+  \item cDNA de-concatenation and UMI-based PCR deduplication;
+  \item Detection of polyadenylation sites and TSS, fusion gene discovery;
+  \item Open source: \texttt{github.com/ablab/IsoQuant} (PyPI and Bioconda).
+\end{itemize}
+
+\section{Analysis pipeline}
+\justifying
+\begin{figure}
+    \centering
+    \includegraphics[width=0.99\textwidth]{figures/pipeline.pdf}
+    \caption{\sffamily IsoQuant4 analysis pipeline: read splitting and
+    barcode calling, novel isoform discovery, read alignment and assignment,
+    PCR deduplication and barcode-aware quantification.}
+    \label{fig:pipeline}
+\end{figure}
+
+\section{Barcode calling}
+\justifying
+\begin{figure}
+    \centering
+    \includegraphics[width=0.80\textwidth]{figures/barcode_calling.pdf}
+    \caption{\sffamily Barcode calling scheme: anchoring elements (primer,
+    linker, poly(T)) locate the barcode, candidates are selected via a k-mer
+    index of known barcodes and resolved by Smith--Waterman alignment.}
+    \label{fig:barcode}
+\end{figure}
+
+\section{Scaling to billions of barcodes}
+\justifying
+\begin{minipage}[c]{0.44\textwidth}
+\begin{table}
+    \begin{tabular*}{0.95\textwidth}{@{\extracolsep{\fill}} l r }
+    \toprule
+        \textbf{Protocol} & \textbf{Cells/spots} \\
+    \midrule
+        10x single-cell & 10K \\
+        Curio           & 100K \\
+        10x Visium HD   & 10M \\
+        Stereo-seq      & \textbf{500M} \\
+    \bottomrule
+    \end{tabular*}
+\end{table}
+\end{minipage}%
+\begin{minipage}[c]{0.55\textwidth}
+\begin{itemize}
+  \item \textbf{Barcode indexing:} 500M barcodes indexed in 10 minutes;
+  \item \textbf{Read processing:} 60M reads/h \\
+        (10M reads/h with de-concatenation).
+\end{itemize}
+\end{minipage}
+
+\section{Barcode detection accuracy}
+\justifying
+Barcode detection on simulated ONT reads (3.8\% error rate, 25\,bp barcodes),
+with and without cDNA concatenation:
+\begin{table}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r }
+    \toprule
+        \textbf{Simulated ONT} & \textbf{1 cDNA/read} & \textbf{Concatenated cDNAs} \\
+    \midrule
+        Precision & \textbf{99.95\%} & \textbf{99.94\%} \\
+        Recall    & 76.62\% & 78.07\% \\
+    \bottomrule
+    \end{tabular*}
+\end{table}
+
+\vspace{1em}
+Visium HD barcode detection compared to SpaceRanger: IsoQuant4 yields
+2.5--3.4$\times$ fewer false positives:
+\begin{table}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l r r }
+    \toprule
+        \textbf{Resolution} & \textbf{Metric} & \textbf{IsoQuant4} & \textbf{SpaceRanger} \\
+    \midrule
+        2\,\textmu m & Precision & \textbf{97.58\%} & 94.18\% \\
+                     & Recall    & 76.08\% & 78.88\% \\
+    \midrule
+        8\,\textmu m & Precision & \textbf{99.29\%} & 97.50\% \\
+                     & Recall    & 76.39\% & 79.45\% \\
+    \bottomrule
+    \end{tabular*}
+\end{table}
 
 % ============================ RIGHT COLUMN ===========================
 \newcolumn
 
+\section{Spatial isoform variability}
+\justifying
+Spatially variable isoform expression detected with spot-based protocols may
+reflect either true variability within a single cell type or differences in
+regional cell-type composition. Single-cell resolution allows
+distinguishing these two scenarios by testing isoform variability within
+each cell type separately.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/variability.pdf}
+    \caption{\sffamily Apparent spatial variability (top) can be explained
+    by cell-type abundance alone; true within-cell-type variability (bottom)
+    requires single-cell resolution to be detected.}
+    \label{fig:variability}
+\end{figure}
+
+\section{Spl-IsoFind detects spatially variable isoforms}
+\justifying
+Spl-IsoFind detects spatially variable isoforms using Moran's~$I$ spatial
+autocorrelation of relative isoform expression; significance is assessed
+with a permutation test. Combined with region-wise isoform tests, it detects
+both known patterns and signals not aligned with predefined anatomical
+regions.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.99\textwidth]{figures/splisofind.pdf}
+    \caption{\sffamily Moran's $I$ is computed on the observed data
+    ($I_{\mathrm{OBS}}$) and on permuted data ($I_{\mathrm{PERM}}$); the
+    empirical P-value compares the original score to the permuted
+    distribution.}
+    \label{fig:splisofind}
+\end{figure}
+
+\section{Spatially variable isoforms in mouse brain}
+\justifying
+Applied to mouse brain spatial long-read datasets with nanometer resolution,
+our toolkit discovers spatially variable isoforms at single-cell level.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.99\textwidth]{figures/sv_isoforms.pdf}
+    \caption{\sffamily Spatially variable isoforms per cell type (ALL: all
+    cells, EX: excitatory neurons, IN: inhibitory neurons, OLI:
+    oligodendrocytes, AST: astrocytes) and overlap of significant isoforms
+    between PacBio and ONT.}
+    \label{fig:svisoforms}
+\end{figure}
+
+Spatial autocorrelation captures most genes found by predefined-region tests
+and reveals additional signals, such as a novel \textit{Ighm} isoform:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/sv_genes_ighm.pdf}
+    \caption{\sffamily Genes with significant spatial isoform variability
+    detected by predefined regions vs.\ spatial autocorrelation (left);
+    spatial distribution of the relative expression of a novel
+    \textit{Ighm} isoform (right).}
+    \label{fig:ighm}
+\end{figure}
+
+Spatially variable isoforms strongly overlap between spatial protocols:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.62\textwidth]{figures/protocol_overlap.pdf}
+    \caption{\sffamily Overlap of significant isoforms between Stereo-seq
+    and 10x Visium HD.}
+    \label{fig:overlap}
+\end{figure}
+
 \section{Conclusions}
 \justifying
-Placeholder.
+\begin{itemize}
+  \item First demonstration of long-read spatial isoform mapping at
+        single-cell resolution;
+  \item Combined long-read sequencing with Stereo-seq and 10x Visium HD;
+  \item Developed a universal pipeline (IsoQuant4) for bulk, single-cell
+        and spatial long-read data;
+  \item Created a package (Spl-IsoFind) for detecting spatially variable
+        isoforms;
+  \item Revealed cell-type-specific spatially variable isoforms in adult
+        mouse brain.
+\end{itemize}
+
+\section{Acknowledgements}
+\justifying
+% TODO: fill in grant acknowledgements below
+[GRANT ACKNOWLEDGEMENTS PLACEHOLDER --- funding agencies and grant numbers]
+
+\vspace{0.5em}
+\small
+Software: \texttt{github.com/ablab/IsoQuant} \quad
+\texttt{github.com/tilgnerlab/Spl-IsoFind}
+
+\section{References}
+\printbibliography[heading=none]
 
 \end{poster}
 \end{document}
