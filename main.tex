@@ -8,8 +8,9 @@
 \usepackage[english]{babel}
 \usefonttheme{serif}
 \usepackage{booktabs}
+\usepackage{caption}
 
-\usepackage[orientation=portrait,size=a0,scale=1.2]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=0.85]{beamerposter}
 \usetheme[COM, twocolumn]{HYposter}
 
 \addbibresource{bibliography.bib}
@@ -32,7 +33,12 @@
   andrey.przhibelskiy@helsinki.fi
 }
 
+% TODO: replace flames/logo.png with actual partner logos (bottom-left corner)
 \leftcorner{{\includegraphics[height=5cm]{flames/logo.png}}}
+
+% Smaller captions than the theme default
+\captionsetup{font={footnotesize},textfont={bf},aboveskip=12pt,belowskip=2pt}
+\renewcommand\bibfont{\tiny}
 
 % Recommended fonts are Georgia / Arial; fall back to metric-compatible
 % Liberation fonts when they are not installed.
@@ -49,39 +55,37 @@
 \section{Introduction}
 \justifying
 Single-cell and spatial transcriptomics combined with long-read sequencing
-enable isoform-level expression profiling and the study of alternative
-splicing. However, processing such data poses distinct algorithmic
-challenges: error-prone reads, extremely large barcode whitelists, molecule
-concatenation artifacts and PCR duplicates, as well as a lack of methods for
-detecting spatially variable isoforms. Here we present
-\textbf{IsoQuant4}~\cite{prjibelski2023} --- a universal toolkit for
-processing long-read RNA-seq data obtained with various protocols ---
-complemented by \textbf{Spl-IsoFind}~\cite{michielsen2026}, which discovers
-spatially variable isoforms.
+enable isoform-level profiling and the study of alternative splicing.
+However, processing such data poses distinct algorithmic challenges:
+error-prone reads, extremely large barcode whitelists, concatenation
+artifacts and PCR duplicates, as well as a lack of methods for detecting
+spatially variable isoforms. Here we present
+\textbf{IsoQuant4}~\cite{prjibelski2023}, a universal toolkit for processing
+long-read RNA-seq data obtained with various protocols, complemented by
+\textbf{Spl-IsoFind}~\cite{michielsen2026} for discovering spatially
+variable isoforms.
 
 \section{Key features}
 \justifying
 \begin{itemize}
   \item Gene, transcript, exon and splice junction quantification for bulk,
-        single-cell and spatial long-read data (PacBio and ONT);
+        single-cell and spatial long-read data (PacBio, ONT);
   \item Reference-based and \textit{de novo} transcript discovery;
-  \item High-precision barcode calling for 10x single-cell, Visium and
-        Visium HD, Curio and Stereo-seq;
-  \item Universal barcode calling for any custom protocol via a
-        user-specified molecule description format;
+  \item Barcode calling: 10x single-cell, Visium, Visium HD, Curio,
+        Stereo-seq, or any custom protocol via a molecule description format;
   \item cDNA de-concatenation and UMI-based PCR deduplication;
-  \item Detection of polyadenylation sites and TSS, fusion gene discovery;
-  \item Open source: \texttt{github.com/ablab/IsoQuant} (PyPI and Bioconda).
+  \item Poly(A) site and TSS detection, fusion gene discovery;
+  \item Open source: \texttt{github.com/ablab/IsoQuant} (PyPI, Bioconda).
 \end{itemize}
 
 \section{Analysis pipeline}
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/pipeline.pdf}
-    \caption{\sffamily IsoQuant4 analysis pipeline: read splitting and
-    barcode calling, novel isoform discovery, read alignment and assignment,
-    PCR deduplication and barcode-aware quantification.}
+    \includegraphics[width=0.85\textwidth]{figures/pipeline.pdf}
+    \caption{\sffamily IsoQuant4 pipeline: barcode calling, isoform
+    discovery, read assignment, PCR deduplication and barcode-aware
+    quantification.}
     \label{fig:pipeline}
 \end{figure}
 
@@ -89,18 +93,17 @@ spatially variable isoforms.
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=0.80\textwidth]{figures/barcode_calling.pdf}
-    \caption{\sffamily Barcode calling scheme: anchoring elements (primer,
-    linker, poly(T)) locate the barcode, candidates are selected via a k-mer
-    index of known barcodes and resolved by Smith--Waterman alignment.}
+    \includegraphics[width=0.50\textwidth]{figures/barcode_calling.pdf}
+    \caption{\sffamily Anchors locate the barcode; candidates from a
+    k-mer index are resolved by Smith--Waterman alignment.}
     \label{fig:barcode}
 \end{figure}
 
-\section{Scaling to billions of barcodes}
+\section{Scaling to 500M barcodes}
 \justifying
-\begin{minipage}[c]{0.44\textwidth}
+\begin{minipage}[c]{0.42\textwidth}
 \begin{table}
-    \begin{tabular*}{0.95\textwidth}{@{\extracolsep{\fill}} l r }
+    \begin{tabular*}{0.92\textwidth}{@{\extracolsep{\fill}} l r }
     \toprule
         \textbf{Protocol} & \textbf{Cells/spots} \\
     \midrule
@@ -112,142 +115,129 @@ spatially variable isoforms.
     \end{tabular*}
 \end{table}
 \end{minipage}%
-\begin{minipage}[c]{0.55\textwidth}
+\begin{minipage}[c]{0.57\textwidth}
 \begin{itemize}
   \item \textbf{Barcode indexing:} 500M barcodes indexed in 10 minutes;
-  \item \textbf{Read processing:} 60M reads/h \\
-        (10M reads/h with de-concatenation).
+  \item \textbf{Read processing:} 60M reads/h (10M reads/h with
+        de-concatenation).
 \end{itemize}
 \end{minipage}
 
 \section{Barcode detection accuracy}
 \justifying
-Barcode detection on simulated ONT reads (3.8\% error rate, 25\,bp barcodes),
-with and without cDNA concatenation:
+Simulated ONT reads, 3.8\% error rate, 25\,bp barcodes (left); on Visium
+HD, IsoQuant4 yields 2.5--3.4$\times$ fewer false positives (right).
+
+\vspace{0.5em}
+\begin{minipage}[t]{0.44\textwidth}
+\footnotesize
 \begin{table}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r }
     \toprule
-        \textbf{Simulated ONT} & \textbf{1 cDNA/read} & \textbf{Concatenated cDNAs} \\
+        \textbf{Simulated} & \textbf{1 cDNA} & \textbf{Concat.} \\
+        \textbf{ONT}       & \textbf{/read}  & \textbf{cDNAs} \\
     \midrule
         Precision & \textbf{99.95\%} & \textbf{99.94\%} \\
         Recall    & 76.62\% & 78.07\% \\
     \bottomrule
     \end{tabular*}
 \end{table}
-
-\vspace{1em}
-Visium HD barcode detection compared to SpaceRanger: IsoQuant4 yields
-2.5--3.4$\times$ fewer false positives:
+\end{minipage}\hfill
+\begin{minipage}[t]{0.54\textwidth}
+\footnotesize
 \begin{table}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l r r }
     \toprule
-        \textbf{Resolution} & \textbf{Metric} & \textbf{IsoQuant4} & \textbf{SpaceRanger} \\
+        \textbf{Visium HD} & & \textbf{IsoQuant4} & \textbf{SpaceRanger} \\
     \midrule
         2\,\textmu m & Precision & \textbf{97.58\%} & 94.18\% \\
                      & Recall    & 76.08\% & 78.88\% \\
-    \midrule
         8\,\textmu m & Precision & \textbf{99.29\%} & 97.50\% \\
                      & Recall    & 76.39\% & 79.45\% \\
     \bottomrule
     \end{tabular*}
 \end{table}
+\end{minipage}
 
 % ============================ RIGHT COLUMN ===========================
 \newcolumn
 
 \section{Spatial isoform variability}
 \justifying
-Spatially variable isoform expression detected with spot-based protocols may
-reflect either true variability within a single cell type or differences in
-regional cell-type composition. Single-cell resolution allows
-distinguishing these two scenarios by testing isoform variability within
-each cell type separately.
+Spatial isoform variability detected with spot-based protocols may reflect
+either true within-cell-type variability or differences in regional
+cell-type composition. Single-cell resolution distinguishes these scenarios
+by testing variability within each cell type separately.
 \begin{figure}
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/variability.pdf}
-    \caption{\sffamily Apparent spatial variability (top) can be explained
-    by cell-type abundance alone; true within-cell-type variability (bottom)
-    requires single-cell resolution to be detected.}
+    \includegraphics[width=0.56\textwidth]{figures/variability.pdf}
+    \caption{\sffamily True within-cell-type variability (bottom) requires
+    single-cell resolution.}
     \label{fig:variability}
 \end{figure}
 
-\section{Spl-IsoFind detects spatially variable isoforms}
+\section{Spl-IsoFind}
 \justifying
-Spl-IsoFind detects spatially variable isoforms using Moran's~$I$ spatial
-autocorrelation of relative isoform expression; significance is assessed
-with a permutation test. Combined with region-wise isoform tests, it detects
-both known patterns and signals not aligned with predefined anatomical
-regions.
+Spl-IsoFind detects spatially variable isoforms via Moran's~$I$ spatial
+autocorrelation of relative isoform expression, with significance assessed
+by a permutation test, detecting both known patterns and signals beyond
+predefined anatomical regions.
 \begin{figure}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/splisofind.pdf}
-    \caption{\sffamily Moran's $I$ is computed on the observed data
-    ($I_{\mathrm{OBS}}$) and on permuted data ($I_{\mathrm{PERM}}$); the
-    empirical P-value compares the original score to the permuted
-    distribution.}
+    \includegraphics[width=0.70\textwidth]{figures/splisofind.pdf}
+    \caption{\sffamily Significance of Moran's $I$ is assessed by comparing
+    the observed score to the permuted distribution.}
     \label{fig:splisofind}
 \end{figure}
 
-\section{Spatially variable isoforms in mouse brain}
+\section{Results: mouse brain}
 \justifying
-Applied to mouse brain spatial long-read datasets with nanometer resolution,
-our toolkit discovers spatially variable isoforms at single-cell level.
+Applied to mouse brain spatial long-read data with nanometer resolution, our
+toolkit discovers spatially variable isoforms at single-cell level,
+reproducibly across platforms and protocols.
 \begin{figure}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/sv_isoforms.pdf}
-    \caption{\sffamily Spatially variable isoforms per cell type (ALL: all
-    cells, EX: excitatory neurons, IN: inhibitory neurons, OLI:
-    oligodendrocytes, AST: astrocytes) and overlap of significant isoforms
-    between PacBio and ONT.}
+    \includegraphics[width=0.67\textwidth]{figures/sv_isoforms.pdf}
+    \caption{\sffamily Spatially variable isoforms per cell type (left) and
+    PacBio/ONT overlap (right).}
     \label{fig:svisoforms}
 \end{figure}
 
-Spatial autocorrelation captures most genes found by predefined-region tests
-and reveals additional signals, such as a novel \textit{Ighm} isoform:
 \begin{figure}
     \centering
-    \includegraphics[width=0.90\textwidth]{figures/sv_genes_ighm.pdf}
-    \caption{\sffamily Genes with significant spatial isoform variability
-    detected by predefined regions vs.\ spatial autocorrelation (left);
-    spatial distribution of the relative expression of a novel
-    \textit{Ighm} isoform (right).}
+    \begin{minipage}[c]{0.46\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/sv_genes_ighm.pdf}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.32\textwidth}
+        \centering
+        \includegraphics[width=0.92\textwidth]{figures/protocol_overlap.pdf}
+    \end{minipage}
+    \caption{\sffamily Predefined regions vs.\ spatial autocorrelation; a
+    novel \textit{Ighm} isoform; Stereo-seq/Visium HD overlap.}
     \label{fig:ighm}
-\end{figure}
-
-Spatially variable isoforms strongly overlap between spatial protocols:
-\begin{figure}
-    \centering
-    \includegraphics[width=0.62\textwidth]{figures/protocol_overlap.pdf}
-    \caption{\sffamily Overlap of significant isoforms between Stereo-seq
-    and 10x Visium HD.}
-    \label{fig:overlap}
 \end{figure}
 
 \section{Conclusions}
 \justifying
 \begin{itemize}
-  \item First demonstration of long-read spatial isoform mapping at
-        single-cell resolution;
-  \item Combined long-read sequencing with Stereo-seq and 10x Visium HD;
-  \item Developed a universal pipeline (IsoQuant4) for bulk, single-cell
-        and spatial long-read data;
-  \item Created a package (Spl-IsoFind) for detecting spatially variable
-        isoforms;
-  \item Revealed cell-type-specific spatially variable isoforms in adult
-        mouse brain.
+  \item First long-read spatial isoform mapping at single-cell resolution;
+  \item Long-read sequencing combined with Stereo-seq and 10x Visium HD;
+  \item Universal pipeline for bulk, single-cell and spatial long-read data;
+  \item Spl-IsoFind detects spatially variable isoforms;
+  \item Cell-type-specific spatially variable isoforms in adult mouse brain.
 \end{itemize}
 
 \section{Acknowledgements}
 \justifying
+\footnotesize
 % TODO: fill in grant acknowledgements below
 [GRANT ACKNOWLEDGEMENTS PLACEHOLDER --- funding agencies and grant numbers]
 
-\vspace{0.5em}
-\small
 Software: \texttt{github.com/ablab/IsoQuant} \quad
 \texttt{github.com/tilgnerlab/Spl-IsoFind}
 
-\section{References}
+\vspace{0.5em}
 \printbibliography[heading=none]
 
 \end{poster}
