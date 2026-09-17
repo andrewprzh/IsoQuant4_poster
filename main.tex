@@ -10,15 +10,17 @@
 \usepackage{booktabs}
 \usepackage{caption}
 
-\usepackage[orientation=portrait,size=a0,scale=0.85]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=0.95]{beamerposter}
 \usetheme[COM, twocolumn]{HYposter}
+% Slightly narrower columns => larger gap between them
+\renewcommand{\insertcolumnwidth}{0.43\paperwidth}
 
 \addbibresource{bibliography.bib}
 
 % Title and author info (from the GCB abstract)
 \titlestart{A universal toolkit}% first words in faculty colour
-\titleend{ for single-cell and spatial\\ long-read transcriptomic sequencing data}
-\titlesize{\Huge}
+\titleend{ for\\ single-cell and spatial\\ long-read transcriptomic\\ sequencing data}
+\titlesize{\veryHuge}
 
 \author{
   \small \underline{Andrey Prjibelski}\textsuperscript{1}, Lieke Michielsen\textsuperscript{2}, \\
