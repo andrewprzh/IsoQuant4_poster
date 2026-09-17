@@ -13,3 +13,5 @@
 *.snm
 *.toc
 main.pdf
+*.vrb
+*.xdv
