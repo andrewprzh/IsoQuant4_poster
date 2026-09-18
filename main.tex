@@ -58,34 +58,38 @@
 \justifying
 Single-cell and spatial transcriptomics combined with long-read sequencing
 enable isoform-level profiling and the study of alternative splicing.
-However, processing such data poses distinct algorithmic challenges:
-error-prone reads, extremely large barcode whitelists, concatenation
-artifacts and PCR duplicates, as well as a lack of methods for detecting
-spatially variable isoforms. Here we present
-\textbf{IsoQuant4}~\cite{prjibelski2023} --- a universal toolkit for processing
+We present \textbf{IsoQuant4}~\cite{prjibelski2023} --- a universal toolkit for processing
 long-read RNA-seq data, \textbf{Spl-IsoFind}~\cite{michielsen2026} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
 
-\section{Key features}
+\section{IsoQuant4 features}
 \justifying
 \begin{itemize}
-  \item Gene, transcript, exon and splice junction quantification for bulk,
-        single-cell and spatial long-read data (PacBio, ONT);
-  \item Reference-based and \textit{de novo} transcript discovery;
-  \item Barcode calling: 10x single-cell, Visium, Visium HD, Curio,
-        Stereo-seq, or any custom protocol via a molecule description format;
-  \item cDNA de-concatenation and UMI-based PCR deduplication;
-  \item Poly(A) site and TSS detection, fusion gene discovery;
-  \item Open source: \texttt{github.com/ablab/IsoQuant} (PyPI, Bioconda).
+  \item Feature quantification 
+  \begin{itemize}
+        \item Genes/transcripts
+        \item Exons/splice junctions/intron retentions
+        \item Works for bulk, single-cell and spatial data
+  \end{itemize}
+  \item Reference-based and \textit{de novo} transcript discovery
+  \item Barcode calling:
+  \begin{itemize}
+        \item 10x single-cell v2/v3/v4
+        \item 10x Visium/VisiumHD
+        \item Curio
+        \item Stereo-seq
+        \item cDNA de-concatenation
+  \end{itemize}
+  \item Universal barcode calling for any custom protocol
+  \item PCR deduplication;
+  \item Poly(A) site and TSS detection
+  \item Fusion gene discovery
 \end{itemize}
 
-\section{Analysis pipeline}
+\section{IsoQuant4 pipeline}
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/pipeline.pdf}
-    \caption{\sffamily IsoQuant4 pipeline: barcode calling, isoform
-    discovery, read assignment, PCR deduplication and barcode-aware
-    quantification.}
+    \includegraphics[width=1.0\textwidth]{figures/pipeline.pdf}
     \label{fig:pipeline}
 \end{figure}
 
@@ -93,9 +97,7 @@ long-read RNA-seq data, \textbf{Spl-IsoFind}~\cite{michielsen2026} --- a package
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=0.50\textwidth]{figures/barcode_calling.pdf}
-    \caption{\sffamily Anchors locate the barcode; candidates from a
-    k-mer index are resolved by Smith--Waterman alignment.}
+    \includegraphics[width=1.0\textwidth]{figures/barcode_calling.pdf}
     \label{fig:barcode}
 \end{figure}
 
