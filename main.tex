@@ -30,15 +30,15 @@
 \titleright{%
   \begin{minipage}[t]{0.062\paperwidth}\centering
       \qrcode[height=4.8cm]{https://github.com/ablab/IsoQuant}\\[1ex]
-      {\scriptsize\bfseries IsoQuant}
+      {\small\bfseries IsoQuant}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.062\paperwidth}\centering
       \qrcode[height=4.8cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1ex]
-      {\scriptsize\bfseries Spl-IsoFind}
+      {\small\bfseries Spl-IsoFind}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.062\paperwidth}\centering
       \qrcode[height=4.8cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1ex]
-      {\scriptsize\bfseries Paper}
+      {\small\bfseries Paper}
   \end{minipage}%
 }
 
@@ -80,22 +80,27 @@
 Single-cell and spatial transcriptomics combined with long-read sequencing
 enable isoform profiling and the study of alternative splicing at cellular level.
 We present \textbf{IsoQuant4} --- a universal toolkit for processing
-long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
+long-read RNA-seq data, \textbf{\mbox{Spl-IsoFind}} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
 
 \section{IsoQuant4 features}
 \justifying
 \hspace*{1cm}% shift the list right
 \begin{minipage}{\dimexpr\textwidth-1cm}
 \begin{itemize}
+  \addtolength{\itemsep}{0.2ex}
   \item Feature quantification 
+  \vspace{0.1ex}
   \begin{itemize}
+        \addtolength{\itemsep}{0.1ex}
         \item Genes / isoforms
         \item Exons / splice junctions / intron retentions
         \item Works for bulk, single-cell and spatial data
   \end{itemize}
   \item Reference-based and \textit{de novo} transcript discovery
   \item Barcode calling
+  \vspace{0.1ex}
   \begin{itemize}
+        \addtolength{\itemsep}{0.1ex}
         \item 10x single-cell v2 / v3 / v4
         \item 10x Visium / VisiumHD
         \item Curio Biosciences
@@ -117,6 +122,7 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
     \label{fig:pipeline}
 \end{figure}
 
+\vspace{-0.5cm}
 \section{Barcode calling}
 \justifying
 \begin{figure}
@@ -125,6 +131,7 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
     \label{fig:barcode}
 \end{figure}
 
+\vspace{-1cm}
 \section{Scaling to 500M barcodes}
 \justifying
 \begin{minipage}[c]{0.42\textwidth}
@@ -157,7 +164,7 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
 
 \section{Barcode detection accuracy}
 \justifying
-Simulated ONT reads, 3.8\% error rate.
+Simulated ONT reads, 3.8\% error rate
 
 \vspace{0.5em}
 \begin{minipage}[t]{0.46\textwidth}
@@ -172,7 +179,7 @@ Simulated ONT reads, 3.8\% error rate.
         Concat.\ cDNAs & \textbf{99.94\%} & 78.07\% \\
     \bottomrule
     \end{tabular}
-    \caption{\sffamily Almost perfect precision for 500M 25\,bp barcodes.}
+    \caption{\sffamily Almost perfect precision for 500M 25\,bp barcodes}
 \end{table}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.52\textwidth}
@@ -190,7 +197,7 @@ Simulated ONT reads, 3.8\% error rate.
                      & SpaceRanger & 97.50\% & 79.45\% \\
     \bottomrule
     \end{tabular}
-    \caption{\sffamily 2.5--3.4$\times$ decrease in false positive rate.}
+    \caption{\sffamily 2.5--3.4$\times$ decrease in false positive rate}
 \end{table}
 \end{minipage}
 
@@ -204,10 +211,10 @@ Simulated ONT reads, 3.8\% error rate.
     \includegraphics[width=1.0\textwidth]{figures/variability.pdf}
     \label{fig:variability}
 \end{figure}
-
+\vspace{-2cm}
 \section{Spl-IsoFind}
 \justifying
-Spl-IsoFind detects spatially variable isoforms linked to and not linked to pre-defined brain regions.
+Spl-IsoFind detects spatially variable isoforms linked and not linked to pre-defined brain regions.
 The latter is detected via Moran's~$I$ spatial autocorrelation and permutation tests.
 \begin{figure}
     \centering
@@ -215,34 +222,30 @@ The latter is detected via Moran's~$I$ spatial autocorrelation and permutation t
     \label{fig:splisofind}
 \end{figure}
 
-\section{Results: mouse brain}
+\section{Mouse brain spatial data}
 \justifying
-Applied to mouse brain spatial long-read data with nanometer resolution, our
-toolkit discovers spatially variable isoforms at single-cell level,
-reproducibly across platforms and protocols.
+Detecting spatially variable isoforms using Stereo-seq (500nm) and 10x Visium HD (2/8\,\textmu m)
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.67\textwidth]{figures/sv_isoforms.pdf}
-    \caption{\sffamily Spatially variable isoforms per cell type (left) and
-    PacBio/ONT overlap (right).}
+    \begin{minipage}[c]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/brain.pdf}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/spvi.png}
+    \end{minipage}
     \label{fig:svisoforms}
 \end{figure}
-
+\vspace{1cm}
 \begin{figure}
     \centering
-    \begin{minipage}[c]{0.46\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/sv_genes_ighm.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.32\textwidth}
-        \centering
-        \includegraphics[width=0.92\textwidth]{figures/protocol_overlap.pdf}
-    \end{minipage}
-    \caption{\sffamily Predefined regions vs.\ spatial autocorrelation; a
-    novel \textit{Ighm} isoform; Stereo-seq/Visium HD overlap.}
-    \label{fig:ighm}
+    \includegraphics[width=\textwidth]{figures/results.pdf}
+    \label{fig:res}
 \end{figure}
 
+\vspace{-1.5cm}
 \section{Conclusions}
 \justifying
 \begin{itemize}
