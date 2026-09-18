@@ -10,6 +10,9 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage[nolinks]{qrcode}
+\usepackage{etoolbox}
+% extra vertical space between list items
+\AtBeginEnvironment{itemize}{\addtolength{\itemsep}{0.4ex}}
 
 \usepackage[orientation=portrait,size=a0,scale=1.0]{beamerposter}
 \usetheme[COM, twocolumn]{HYposter}
@@ -47,7 +50,7 @@
 \IfFontExistsTF{Calibri}{\setmainfont{Calibri}}{\setmainfont{Carlito}}
 \IfFontExistsTF{Calibri}{\setsansfont{Calibri}}{\setsansfont{Carlito}}
 % Conference guidelines: >=0.8cm text with >=1.1cm line spacing
-\linespread{1.06}
+\linespread{1.12}
 
 \begin{document}
 

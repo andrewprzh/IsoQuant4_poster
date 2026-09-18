@@ -87,7 +87,7 @@
 \newenvironment{poster}
 {
 \begin{frame}[t, fragile, environment=poster]
-\begin{columns}[T]\column{0.02\paperwidth}
+\begin{columns}[T]\column{0.03\paperwidth}
 }
 {
 \ifthenelse{\boolean{inblock}}{\end{block}}{}
@@ -143,6 +143,8 @@
 
 \setbeamertemplate{itemize items}[triangle]
 \setbeamercolor{itemize item}{fg=TDK,bg=white}
+\setbeamercolor{itemize subitem}{fg=grey55,bg=white}
+\setbeamercolor{itemize subsubitem}{fg=grey55,bg=white}
 \setbeamercolor{enumerate item}{fg=TDK,bg=white}
 \setbeamercolor{description item}{fg=TDK,bg=white}
 \setbeamercolor{caption name}{fg=black,bg=white}
@@ -154,7 +156,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Setting up a text block
 \setbeamertemplate{block begin}{
-	\vskip2.2ex%
+	\vskip1.2ex%
  
 	\begin{beamercolorbox}[ht=0.0ex,dp=0.0ex,center,rounded=false,shadow=false,leftskip=-0.1ex,rightskip=5ex, colsep*=-3.60ex]{block title}% 
 
@@ -165,7 +167,7 @@
 	\usebeamerfont{block body}
  \vskip1.0ex%
 	\begin{beamercolorbox}[rounded=false,shadow=false,leftskip=0.1ex,rightskip=-10ex,colsep*=0.60ex,sep=0ex,vmode]{block body}%
-	\setlength{\parskip}{0.5ex}
+	\setlength{\parskip}{0.8ex}
 	\ifbeamercolorempty[bg]{block body}{\vskip-0.25ex}{\vskip-0.1ex}%
  
 
@@ -234,7 +236,7 @@
   \begin{beamercolorbox}[wd=\paperwidth]{line}
 \hskip0.025\paperwidth\rule{0.95\paperwidth}{1pt}
   \end{beamercolorbox}
-\vskip6ex
+\vskip1ex
 }
 
 %%%%
