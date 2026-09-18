@@ -60,8 +60,8 @@
 \justifying
 Single-cell and spatial transcriptomics combined with long-read sequencing
 enable isoform-level profiling and the study of alternative splicing.
-We present \textbf{IsoQuant4}~\cite{prjibelski2023} --- a universal toolkit for processing
-long-read RNA-seq data, \textbf{Spl-IsoFind}~\cite{michielsen2026} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
+We present \textbf{IsoQuant4} --- a universal toolkit for processing
+long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
 
 \section{IsoQuant4 features}
 \justifying
@@ -185,30 +185,19 @@ HD, IsoQuant4 yields 2.5--3.4$\times$ fewer false positives (right).
 \newcolumn
 
 \section{Spatial isoform variability}
-\justifying
-Spatial isoform variability detected with spot-based protocols may reflect
-either true within-cell-type variability or differences in regional
-cell-type composition. Single-cell resolution distinguishes these scenarios
-by testing variability within each cell type separately.
 \begin{figure}
     \centering
-    \includegraphics[width=0.56\textwidth]{figures/variability.pdf}
-    \caption{\sffamily True within-cell-type variability (bottom) requires
-    single-cell resolution.}
+    \includegraphics[width=0.95\textwidth]{figures/variability.pdf}
     \label{fig:variability}
 \end{figure}
 
 \section{Spl-IsoFind}
 \justifying
-Spl-IsoFind detects spatially variable isoforms via Moran's~$I$ spatial
-autocorrelation of relative isoform expression, with significance assessed
-by a permutation test, detecting both known patterns and signals beyond
-predefined anatomical regions.
+Spl-IsoFind detects spatially variable isoforms linked to and not linked to pre-defined brain regions.
+The later is detected via Moran's~$I$ spatial autocorrelation and permutation tests.
 \begin{figure}
     \centering
-    \includegraphics[width=0.70\textwidth]{figures/splisofind.pdf}
-    \caption{\sffamily Significance of Moran's $I$ is assessed by comparing
-    the observed score to the permuted distribution.}
+    \includegraphics[width=0.95\textwidth]{figures/splisofind.pdf}
     \label{fig:splisofind}
 \end{figure}
 
