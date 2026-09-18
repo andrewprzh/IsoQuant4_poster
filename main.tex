@@ -26,6 +26,22 @@
 \titleend{A universal toolkit\\ for long-read transcriptomics}
 \titlesize{\VeryHuge}
 
+% QR codes to the right of the title
+\titleright{%
+  \begin{minipage}[t]{0.062\paperwidth}\centering
+      \qrcode[height=4.2cm]{https://github.com/ablab/IsoQuant}\\[1ex]
+      {\scriptsize\bfseries IsoQuant}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.062\paperwidth}\centering
+      \qrcode[height=4.2cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1ex]
+      {\scriptsize\bfseries Spl-IsoFind}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.062\paperwidth}\centering
+      \qrcode[height=4.2cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1ex]
+      {\scriptsize\bfseries Paper}
+  \end{minipage}%
+}
+
 % \hfill separators: the headline stretches these lines across the page
 \author{%
   \underline{Andrey Prjibelski}\textsuperscript{1}\hfill
@@ -116,7 +132,7 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
     \midrule
         10x single-cell & <10K \\
         Curio           & <100K \\
-        10x Visium HD   & ~10M \\
+        10x Visium HD   & $\sim$10M \\
         Stereo-seq      & \textbf{500M} \\
     \bottomrule
     \end{tabular*}
@@ -124,9 +140,11 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
 \end{minipage}%
 \begin{minipage}[c]{0.57\textwidth}
 \begin{itemize}
+  \addtolength{\itemsep}{1ex}
   \item \textbf{Barcode indexing:} 500M in 10 minutes
   \item \textbf{Read processing:}
   \begin{itemize}
+      \addtolength{\itemsep}{1ex}
       \item No deconcatenation: 60M reads/h 
       \item With deconcatenation: 10M reads/h
   \end{itemize}
@@ -138,52 +156,37 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
 Simulated ONT reads, 3.8\% error rate.
 
 \vspace{0.5em}
-\begin{minipage}[t]{0.44\textwidth}
-\footnotesize
+\begin{minipage}[t]{0.46\textwidth}
 \begin{table}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r r }
+    \centering
+    \begin{tabular}{l c c}
     \toprule
-        \textbf{Stereo-seq} & \textbf{1 cDNA} & \textbf{Concatenated} \\
-                            & \textbf{/read}  & \textbf{cDNAs} \\
+        \textbf{Stereo-seq} & \textbf{Precision} & \textbf{Recall} \\
     \midrule
-        Precision & \textbf{99.95\%} & \textbf{99.94\%} \\
-        Recall    & 76.62\% & 78.07\% \\
+        1 cDNA/read   & \textbf{99.95\%} & 76.62\% \\
+        Concat.\ cDNAs & \textbf{99.94\%} & 78.07\% \\
     \bottomrule
-    \end{tabular*}
+    \end{tabular}
+    \caption{\sffamily Almost perfect precision for 500M 25\,bp barcodes.}
 \end{table}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.5\textwidth}
-\footnotesize
+\begin{minipage}[t]{0.52\textwidth}
 \begin{table}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l r r }
+    \centering
+    \begin{tabular}{l l c c}
     \toprule
-        \textbf{Visium HD} & & \textbf{IsoQuant4} & \textbf{SpaceRanger} \\
+        \textbf{Visium HD} & & \textbf{Precision} & \textbf{Recall} \\
     \midrule
-        2\,\textmu m & Precision & \textbf{97.58\%} & 94.18\% \\
-                     & Recall    & 76.08\% & 78.88\% \\
-        8\,\textmu m & Precision & \textbf{99.29\%} & 97.50\% \\
-                     & Recall    & 76.39\% & 79.45\% \\
+        2\,\textmu m & IsoQuant4   & \textbf{97.58\%} & 76.08\% \\
+                     & SpaceRanger & 94.18\% & 78.88\% \\
+    \midrule
+        8\,\textmu m & IsoQuant4   & \textbf{99.29\%} & 76.39\% \\
+                     & SpaceRanger & 97.50\% & 79.45\% \\
     \bottomrule
-    \end{tabular*}
+    \end{tabular}
+    \caption{\sffamily 2.5--3.4$\times$ decrease in false positive rate.}
 \end{table}
 \end{minipage}
-
-% QR codes
-\vspace{0.5em}
-\begin{center}
-\begin{minipage}[t]{0.30\textwidth}\centering
-    \qrcode[height=4.5cm]{https://github.com/ablab/IsoQuant}\\[1.5ex]
-    {\footnotesize\bfseries IsoQuant}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.30\textwidth}\centering
-    \qrcode[height=4.5cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1.5ex]
-    {\footnotesize\bfseriesSpl-IsoFind}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.30\textwidth}\centering
-    \qrcode[height=4.5cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1.5ex]
-    {\footnotesize\bfseries Paper}
-\end{minipage}
-\end{center}
 
 % ============================ RIGHT COLUMN ===========================
 \guttercolumn

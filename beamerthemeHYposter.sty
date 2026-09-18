@@ -64,6 +64,8 @@
 \newcommand{\titleend}[1]{\newcommand{\inserttitleend}{#1}}
 
 \newcommand{\insertleftcorner}{}
+\newcommand{\inserttitleright}{}
+\newcommand{\titleright}[1]{\renewcommand{\inserttitleright}{#1}}
 \newcommand{\leftcorner}[1]{\renewcommand{\insertleftcorner}{#1}}
 
 \newcommand{\inserttitlesize}{\veryHuge}
@@ -188,10 +190,14 @@
 	\begin{minipage}[c]{0.115\paperwidth}
 		\includegraphics[width=0.10\paperwidth]{\flame}
 	\end{minipage}%
-	\begin{minipage}[c]{0.83\paperwidth}
+	\begin{minipage}[c]{0.62\paperwidth}
 		\raggedright
 		{\inserttitlesize\sffamily\bfseries
 		\usebeamercolor{title coloured}{\color{fg}\MakeUppercase{\inserttitlestart}}\usebeamercolor{title grey}{\color{fg}\MakeUppercase{\inserttitleend}}\par}
+	\end{minipage}%
+	\begin{minipage}[c]{0.21\paperwidth}
+		\raggedleft
+		\inserttitleright
 	\end{minipage}
 \end{beamercolorbox}
 % AUTHORS + AFFILIATIONS stretched across the full width
