@@ -9,43 +9,45 @@
 \usefonttheme{serif}
 \usepackage{booktabs}
 \usepackage{caption}
+\usepackage[nolinks]{qrcode}
 
-\usepackage[orientation=portrait,size=a0,scale=0.95]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=1.0]{beamerposter}
 \usetheme[COM, twocolumn]{HYposter}
-% Slightly narrower columns => larger gap between them
-\renewcommand{\insertcolumnwidth}{0.43\paperwidth}
+% Column width; the gutter between columns is set by \guttercolumn below
+\renewcommand{\insertcolumnwidth}{0.45\paperwidth}
 
 \addbibresource{bibliography.bib}
 
 % Title and author info (from the GCB abstract)
 \titlestart{IsoQuant4: }% first words in faculty colour
 \titleend{A universal toolkit\\ for long-read transcriptomics}
-\titlesize{\veryHuge}
+\titlesize{\VeryHuge}
 
-\author{
-  \underline{Andrey Prjibelski}\textsuperscript{1}, Lieke Michielsen\textsuperscript{2}, \\
-  Careen Foord\textsuperscript{2}, Alexandru I. Tomescu\textsuperscript{1}, \\
-  Iman Hajirasouliha\textsuperscript{3}, Hagen U. Tilgner\textsuperscript{2}
+% \hfill separators: the headline stretches these lines across the page
+\author{%
+  \underline{Andrey Prjibelski}\textsuperscript{1}\hfill
+  Lieke Michielsen\textsuperscript{2}\hfill
+  Careen Foord\textsuperscript{2}\hfill
+  Alexandru I. Tomescu\textsuperscript{1}\hfill
+  Iman Hajirasouliha\textsuperscript{3}\hfill
+  Hagen U. Tilgner\textsuperscript{2}\hfill
+  \texttt{andrey.przhibelskiy@helsinki.fi}%
 }
-\institute{
-  \textsuperscript{1}Department of Computer Science, University of Helsinki, Helsinki, Finland \\
-  \textsuperscript{2}Feil Family Brain and Mind Research Institute, Weill Cornell Medicine, NY, USA \\
-  \textsuperscript{3}Institute for Computational Biomedicine, Weill Cornell Medicine, NY, USA \\
-  \vspace{0.5ex}
-  andrey.przhibelskiy@helsinki.fi
+\institute{%
+  \textsuperscript{1}Department of Computer Science, University of Helsinki, Finland\hfill
+  \textsuperscript{2}Feil Family Brain and Mind Research Institute, Weill Cornell Medicine, NY, USA\hfill
+  \textsuperscript{3}Institute for Computational Biomedicine, Weill Cornell Medicine, NY, USA%
 }
-
-% TODO: replace flames/logo.png with actual partner logos (bottom-left corner)
-\leftcorner{{\includegraphics[height=5cm]{flames/logo.png}}}
 
 % Smaller captions than the theme default
 \captionsetup{font={footnotesize},textfont={bf},aboveskip=12pt,belowskip=2pt}
 \renewcommand\bibfont{\tiny}
 
-% Recommended fonts are Georgia / Arial; fall back to metric-compatible
-% Liberation fonts when they are not installed.
-\IfFontExistsTF{Georgia}{\setmainfont{Georgia}}{\setmainfont{Liberation Serif}}
-\IfFontExistsTF{Arial}{\setsansfont{Arial}}{\setsansfont{Liberation Sans}}
+% Calibri to match the figures; Carlito is its metric-compatible clone
+\IfFontExistsTF{Calibri}{\setmainfont{Calibri}}{\setmainfont{Carlito}}
+\IfFontExistsTF{Calibri}{\setsansfont{Calibri}}{\setsansfont{Carlito}}
+% Conference guidelines: >=0.8cm text with >=1.1cm line spacing
+\linespread{1.06}
 
 \begin{document}
 
@@ -89,7 +91,7 @@ long-read RNA-seq data, \textbf{Spl-IsoFind}~\cite{michielsen2026} --- a package
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/pipeline.pdf}
+    \includegraphics[width=0.92\textwidth]{figures/pipeline.pdf}
     \label{fig:pipeline}
 \end{figure}
 
@@ -97,7 +99,7 @@ long-read RNA-seq data, \textbf{Spl-IsoFind}~\cite{michielsen2026} --- a package
 \justifying
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/barcode_calling.pdf}
+    \includegraphics[width=0.92\textwidth]{figures/barcode_calling.pdf}
     \label{fig:barcode}
 \end{figure}
 
@@ -161,7 +163,25 @@ HD, IsoQuant4 yields 2.5--3.4$\times$ fewer false positives (right).
 \end{table}
 \end{minipage}
 
+% QR codes
+\vspace{0.5em}
+\begin{center}
+\begin{minipage}[t]{0.30\textwidth}\centering
+    \qrcode[height=4.5cm]{https://github.com/ablab/IsoQuant}\\[1.5ex]
+    {\footnotesize\bfseries IsoQuant}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}\centering
+    \qrcode[height=4.5cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1.5ex]
+    {\footnotesize\bfseries Spl-IsoFind}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}\centering
+    \qrcode[height=4.5cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1.5ex]
+    {\footnotesize\bfseries Nature Methods paper}
+\end{minipage}
+\end{center}
+
 % ============================ RIGHT COLUMN ===========================
+\guttercolumn
 \newcolumn
 
 \section{Spatial isoform variability}

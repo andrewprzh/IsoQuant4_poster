@@ -80,15 +80,18 @@
 % Command to start a new column, ending open block if one exists
 \newcommand{\newcolumn}{\ifthenelse{\boolean{inblock}}{\end{block}}{}\column{\insertcolumnwidth}}
 
+% Empty spacer column, put between two \newcolumn columns to widen the gutter
+\newcommand{\guttercolumn}{\ifthenelse{\boolean{inblock}}{\end{block}\setboolean{inblock}{false}}{}\column{0.04\paperwidth}}
+
 % Set up all environments so the user doesn't have to
 \newenvironment{poster}
 {
 \begin{frame}[t, fragile, environment=poster]
-\begin{columns}[T]\column{0.04\paperwidth}
+\begin{columns}[T]\column{0.02\paperwidth}
 }
 {
 \ifthenelse{\boolean{inblock}}{\end{block}}{}
-\column{0.01\paperwidth}\end{columns} 
+\column{0.02\paperwidth}\end{columns} 
 \end{frame} 
 }
 
@@ -151,7 +154,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Setting up a text block
 \setbeamertemplate{block begin}{
-	\vskip2.60ex%
+	\vskip2.2ex%
  
 	\begin{beamercolorbox}[ht=0.0ex,dp=0.0ex,center,rounded=false,shadow=false,leftskip=-0.1ex,rightskip=5ex, colsep*=-3.60ex]{block title}% 
 
@@ -174,79 +177,67 @@
 % This is the title part
 \setbeamertemplate{headline}{%
 \leavevmode%
-\vskip1.5cm
 
+\if@beamerposter@portrait
+% LOGO + TITLE row
+\vskip0.6cm
+\begin{beamercolorbox}[wd=\paperwidth]{headline}
+	\hskip0.025\paperwidth%
+	\begin{minipage}[c]{0.115\paperwidth}
+		\includegraphics[width=0.10\paperwidth]{\flame}
+	\end{minipage}%
+	\begin{minipage}[c]{0.83\paperwidth}
+		\raggedright
+		{\inserttitlesize\sffamily\bfseries
+		\usebeamercolor{title coloured}{\color{fg}\MakeUppercase{\inserttitlestart}}\usebeamercolor{title grey}{\color{fg}\MakeUppercase{\inserttitleend}}\par}
+	\end{minipage}
+\end{beamercolorbox}
+% AUTHORS + AFFILIATIONS stretched across the full width
+\vskip3ex
+\begin{beamercolorbox}[wd=\paperwidth]{author in headline}
+	\hskip0.025\paperwidth%
+	\begin{minipage}{0.95\paperwidth}
+		\usebeamercolor{author in headline}{\color{fg}\small\hbox to \textwidth{\insertauthor}}
+		\vskip1.5ex
+		\usebeamercolor{author in headline}{\color{fg}\footnotesize\hbox to \textwidth{\insertinstitute}}
+	\end{minipage}
+\end{beamercolorbox}
+\else
+% Landscape: original layout
 \begin{beamercolorbox}[wd=\paperwidth]{title and author}
 \begin{columns}{b}
 	\begin{column}[b]{0.05\paperwidth} % filler
 	\end{column}
-
-	% Typeset the title part differently based on orientation, this is a slightly
-	% quick hack, needs refinement
-	\if@beamerposter@portrait
-
-	% LOGO + TITLE on the same level
-	\begin{column}[b]{0.74\paperwidth}
- \raggedright
-		\vskip-2ex
-		\begin{minipage}[c]{0.115\paperwidth}
-			\includegraphics[width=0.10\paperwidth]{\flame}
-		\end{minipage}%
-		\begin{minipage}[c]{0.625\paperwidth}
-			\raggedright
-			{\inserttitlesize\sffamily\bfseries
-			\usebeamercolor{title coloured}{\color{fg}\MakeUppercase{\inserttitlestart}}\usebeamercolor{title grey}{\color{fg}\MakeUppercase{\inserttitleend}}\par}
-		\end{minipage}
-	\end{column}
-
-	% AUTHOR LIST
- \hskip-10ex
-	\begin{column}[b]{0.19\paperwidth}
-		\raggedleft
-		\usebeamercolor{author in headline}{\color{fg}\small{\insertauthor}}
-		\vskip1ex
-  	\vskip1ex
-        \usebeamercolor{author in headline}
-        {\color{fg}\footnotesize{\insertinstitute}}
-  
-     \end{column}
-	% If orientation is landscape, do this:
-	\else
-	% TITLE
 	\begin{column}[b]{0.15\paperwidth}
 		\vskip5ex
 		\includegraphics[width=0.15\paperwidth]{\flame}\\
- 
 	\end{column}
-
 	\begin{column}[b]{0.47\paperwidth}
 		\raggedright
 		\usebeamercolor{title coloured}{\color{fg}\inserttitlesize{\MakeUppercase{\sffamily\bfseries\inserttitlestart}}}\\
 		\vspace{2ex}
 		\usebeamercolor{title grey}{\color{fg}\inserttitlesize{\MakeUppercase{\sffamily\bfseries\inserttitleend}}}
 	\end{column}
-
-	% AUTHOR LIST
 	\begin{column}[b]{0.2\paperwidth}
 		\raggedright
 		\usebeamercolor{author in headline}{\color{fg}\normalsize{\insertauthor}}
 		\vskip5ex
 		\usebeamercolor{author in headline}{\color{fg}\footnotesize{\insertinstitute}}
 	\end{column}
-	\fi
 	\begin{column}{.05\paperwidth} % filler
 	\end{column}
 \end{columns}
 \end{beamercolorbox}
+\fi
 
 \vskip3ex
   \begin{beamercolorbox}[wd=\paperwidth]{line}
-\hskip0.06\paperwidth\rule{0.90\paperwidth}{1pt}
+\hskip0.025\paperwidth\rule{0.95\paperwidth}{1pt}
   \end{beamercolorbox}
-\vskip10ex
+\vskip6ex
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%
 \setbeamertemplate{footline}{  
   \leavevmode%
   \begin{beamercolorbox}[ht=6ex, wd=\paperwidth]{footline}
