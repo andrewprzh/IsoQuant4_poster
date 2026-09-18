@@ -53,28 +53,33 @@ slide 56.
 
 ## Layout decisions in main.tex
 
-- `\usetheme[COM, twocolumn]{HYposter}`; column width overridden to
-  `0.43\paperwidth` (down from the theme's 0.4451) to widen the gutter.
-- `beamerposter` scale **0.95** → body text ~0.84cm. Content JUST fits:
-  the right column (references) ends close to the footer; the left column
-  has a little more slack. If content gets trimmed, scale=1.0 may fit.
-- Title `\veryHuge` on 4 manually broken lines (`\\` in `\titleend`).
-  If title size or scale changes, re-check the line breaks against the
-  0.625\paperwidth title area.
-- Captions shrunk from the theme's fixed 40pt via `\captionsetup` in the
-  preamble; bibliography font `\tiny`.
-- Fonts: Georgia/Arial required by UH brand; falls back automatically to
-  Liberation Serif/Sans via `\IfFontExistsTF` (Georgia/Arial not installed
-  on this machine; `sudo apt install ttf-mscorefonts-installer` would
-  provide them and gets picked up with no edits).
+- `\usetheme[COM, twocolumn]{HYposter}`; column width `0.45\paperwidth`,
+  explicit gutter via `\guttercolumn` (0.04\paperwidth spacer column)
+  between the two `\newcolumn`s; page side margins ~0.025\paperwidth.
+- `beamerposter` scale **1.0** + `\linespread{1.06}` → body text ~0.88cm,
+  line spacing ~1.1cm (conference guidelines).
+- Title `\VeryHuge`, `\titlestart{IsoQuant4: }` orange + grey rest, manual
+  `\\` break; title area is 0.83\paperwidth — re-check breaks if size
+  changes.
+- Fonts: **Calibri**, falling back to metric-compatible **Carlito**
+  (installed) via `\IfFontExistsTF` — matches the slide figures.
+- Captions shrunk from the theme's fixed 40pt via `\captionsetup`;
+  bibliography font `\tiny`.
+- Three QR codes (LaTeX `qrcode` package, `[nolinks]`) at the bottom of
+  the left column: IsoQuant repo, Spl-IsoFind repo, doi.org link to the
+  Nature Methods paper. 4.5cm, labels below. NOT scan-verified — no QR
+  decoder on this machine; user should phone-test before printing.
 
 ## Local modifications to beamerthemeHYposter.sty
 
-Portrait headline reworked (landscape untouched): flame logo (0.10
-\paperwidth, was 0.20) sits **beside** the title in minipages instead of
-above it; title typeset as one paragraph (with `\par` inside the size
-group) so manual breaks get even line spacing; `\vskip1.5cm` top margin;
-the original `\hskip-15ex` removed (it pushed the logo off-page).
+Portrait headline fully reworked (landscape branch kept as original):
+flame logo (0.10\paperwidth) and title side by side at the very top,
+authors and affiliations below them as full-width lines stretched with
+`\hbox to \textwidth` (put `\hfill` between entries in `\author`/
+`\institute` in main.tex). Poster-env edge filler columns 0.02 (was
+0.04/0.01); `\guttercolumn` command added; block-title top skip 2.2ex
+(was 2.60ex). Footline unchanged but `\leftcorner` is no longer set, so
+the bottom-left corner is empty.
 
 ## Column balance (beamerposter columns do NOT flow)
 
@@ -86,9 +91,9 @@ columns after edits.
 
 - `[GRANT ACKNOWLEDGEMENTS PLACEHOLDER]` in main.tex — funding unknown
   (not in paper draft or slides); user fills in.
-- `flames/logo.png` (bottom-left corner) is the template dummy
-  ("logo logo logo") — replace with partner logos, e.g. Weill Cornell.
-- User plans to trim content further.
+- Right column is to be reworked by the user; its references currently
+  overlap the footer's grey UNIVERSITY OF HELSINKI text slightly.
+- QR codes not yet verified with a scanner.
 
 ## Git conventions
 
