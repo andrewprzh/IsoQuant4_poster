@@ -12,7 +12,7 @@
 \usepackage[nolinks]{qrcode}
 \usepackage{etoolbox}
 % extra vertical space between list items
-\AtBeginEnvironment{itemize}{\addtolength{\itemsep}{0.4ex}}
+\AtBeginEnvironment{itemize}{\addtolength{\itemsep}{0.7ex}}
 
 \usepackage[orientation=portrait,size=a0,scale=1.0]{beamerposter}
 \usetheme[COM, twocolumn]{HYposter}
@@ -50,7 +50,7 @@
 \IfFontExistsTF{Calibri}{\setmainfont{Calibri}}{\setmainfont{Carlito}}
 \IfFontExistsTF{Calibri}{\setsansfont{Calibri}}{\setsansfont{Carlito}}
 % Conference guidelines: >=0.8cm text with >=1.1cm line spacing
-\linespread{1.12}
+\linespread{1.18}
 
 \begin{document}
 
@@ -93,7 +93,7 @@ long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spati
 \section{IsoQuant4 pipeline}
 \justifying
 \begin{figure}
-    \hspace*{-2cm}% adjust to shift the figure left/right
+    \hspace*{-1cm}% adjust to shift the figure left/right
     \includegraphics[width=1.0\textwidth]{figures/pipeline.pdf}
     \label{fig:pipeline}
 \end{figure}
@@ -101,7 +101,7 @@ long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spati
 \section{Barcode calling}
 \justifying
 \begin{figure}
-    \hspace*{-1cm}% adjust to shift the figure left/right
+    \hspace*{0cm}% adjust to shift the figure left/right
     \includegraphics[width=1.0\textwidth]{figures/barcode_calling.pdf}
     \label{fig:barcode}
 \end{figure}
