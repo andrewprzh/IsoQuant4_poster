@@ -28,17 +28,17 @@
 
 % QR codes to the right of the title
 \titleright{%
-  \begin{minipage}[t]{0.062\paperwidth}\centering
+  \begin{minipage}[t]{0.068\paperwidth}\centering
       \qrcode[height=4.8cm]{https://github.com/ablab/IsoQuant}\\[1ex]
-      {\small\bfseries IsoQuant}
+      {\normalsize\bfseries IsoQuant}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.062\paperwidth}\centering
+  \begin{minipage}[t]{0.068\paperwidth}\centering
       \qrcode[height=4.8cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1ex]
-      {\small\bfseries Spl-IsoFind}
+      {\normalsize\bfseries Spl-IsoFind}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.062\paperwidth}\centering
+  \begin{minipage}[t]{0.068\paperwidth}\centering
       \qrcode[height=4.8cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1ex]
-      {\small\bfseries Paper}
+      {\normalsize\bfseries Paper}
   \end{minipage}%
 }
 
@@ -59,7 +59,7 @@
 }
 
 % Smaller captions than the theme default
-\captionsetup{font={footnotesize},textfont={bf},aboveskip=12pt,belowskip=2pt}
+\captionsetup{font={small},textfont={bf},justification=centering,aboveskip=12pt,belowskip=2pt}
 \renewcommand\bibfont{\tiny}
 
 % Calibri to match the figures; Carlito is its metric-compatible clone
@@ -78,9 +78,9 @@
 \section{Introduction}
 \justifying
 Single-cell and spatial transcriptomics combined with long-read sequencing
-enable isoform profiling and the study of alternative splicing at cellular level.
+enable isoform profiling and the study of alternative splicing at the cellular level.
 We present \textbf{IsoQuant4} --- a universal toolkit for processing
-long-read RNA-seq data, \textbf{\mbox{Spl-IsoFind}} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
+long-read RNA-seq data, \textbf{\mbox{Spl-IsoFind}} --- a package for discovering spatially variable isoforms, and their application to mouse brain data.
 
 \section{IsoQuant4 features}
 \justifying
@@ -102,7 +102,7 @@ long-read RNA-seq data, \textbf{\mbox{Spl-IsoFind}} --- a package for discoverin
   \begin{itemize}
         \addtolength{\itemsep}{0.1ex}
         \item 10x single-cell v2 / v3 / v4
-        \item 10x Visium / VisiumHD
+        \item 10x Visium / Visium HD
         \item Curio Biosciences
         \item Stereo-seq
         \item cDNA de-concatenation
@@ -179,7 +179,7 @@ Simulated ONT reads, 3.8\% error rate
         Concat.\ cDNAs & \textbf{99.94\%} & 78.07\% \\
     \bottomrule
     \end{tabular}
-    \caption{\sffamily Almost perfect precision for 500M 25\,bp barcodes}
+    \caption{\sffamily Almost perfect precision\\ for 500M 25\,bp barcodes}
 \end{table}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.52\textwidth}
@@ -224,7 +224,7 @@ The latter is detected via Moran's~$I$ spatial autocorrelation and permutation t
 
 \section{Mouse brain spatial data}
 \justifying
-Detecting spatially variable isoforms using Stereo-seq (500nm) and 10x Visium HD (2/8\,\textmu m)
+Detecting spatially variable isoforms using Stereo-seq (500\,nm) and 10x Visium HD (2/8\,\textmu m)
 
 \begin{figure}
     \centering
@@ -250,17 +250,17 @@ Detecting spatially variable isoforms using Stereo-seq (500nm) and 10x Visium HD
 \justifying
 \begin{itemize}
   \addtolength{\itemsep}{1ex}
-  \item A univesal tool for bulk, single-cell and spatial long-read data
+  \item A universal tool for bulk, single-cell and spatial long-read data
   \item A package for detecting spatially variable isoforms
   \item First long-read spatial isoform mapping at single-cell resolution
   \item Cell-type-specific spatially variable isoforms in adult mouse brain
  \end{itemize} 
 
-\vspace{2.5cm}
+\vspace{1.5cm}
 \textcolor{COM}{\Large \bf ACKNOWLEDGEMENTS} \\
-\vspace{0.8cm}
-\footnotesize
-\textcolor{grey55}{This work was supported by European Union (European Research Council, SCALEBIO, 101169716), Research Council of Finland grants No. 322595, 346968, 358744, MIRA R35 GM152101-01, Brain Initiative grant 1RF1MH121267-01, NIDA U01 DA053625-01, Cure Alzheimer’s fund.}
+\vspace{0.5cm}
+\scriptsize 
+\textcolor{grey55}{This work was supported by European Union (European Research Council, SCALEBIO, 101169716), Research Council of Finland grants No. 322595, 346968, 358744, MIRA R35 GM152101-01, Brain Initiative grant 1RF1MH121267-01, NIDA U01 DA053625-01, Cure Alzheimer’s Fund. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them. The funders had no role in study design, data collection and analysis.}
 
 \vspace{0.5em}
 \printbibliography[heading=none]
