@@ -62,30 +62,30 @@
 \section{Introduction}
 \justifying
 Single-cell and spatial transcriptomics combined with long-read sequencing
-enable isoform-level profiling and the study of alternative splicing.
+enable isoform profiling and the study of alternative splicing at cellular level.
 We present \textbf{IsoQuant4} --- a universal toolkit for processing
-long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
+long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discovering spatially variable isoforms and their application to mouse brain data.
 
 \section{IsoQuant4 features}
 \justifying
-\begin{itemize}
+\begin{itemize}[leftmargin=1cm]
   \item Feature quantification 
   \begin{itemize}
-        \item Genes/transcripts
-        \item Exons/splice junctions/intron retentions
+        \item Genes / isoforms
+        \item Exons / splice junctions / intron retentions
         \item Works for bulk, single-cell and spatial data
   \end{itemize}
   \item Reference-based and \textit{de novo} transcript discovery
-  \item Barcode calling:
+  \item Barcode calling
   \begin{itemize}
-        \item 10x single-cell v2/v3/v4
-        \item 10x Visium/VisiumHD
-        \item Curio
+        \item 10x single-cell v2 / v3 / v4
+        \item 10x Visium / VisiumHD
+        \item Curio Biosciences
         \item Stereo-seq
         \item cDNA de-concatenation
   \end{itemize}
   \item Universal barcode calling for any custom protocol
-  \item PCR deduplication;
+  \item PCR deduplication
   \item Poly(A) site and TSS detection
   \item Fusion gene discovery
 \end{itemize}
@@ -114,9 +114,9 @@ long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spati
     \toprule
         \textbf{Protocol} & \textbf{Cells/spots} \\
     \midrule
-        10x single-cell & 10K \\
-        Curio           & 100K \\
-        10x Visium HD   & 10M \\
+        10x single-cell & <10K \\
+        Curio           & <100K \\
+        10x Visium HD   & ~10M \\
         Stereo-seq      & \textbf{500M} \\
     \bottomrule
     \end{tabular*}
@@ -125,8 +125,11 @@ long-read RNA-seq data, \textbf{Spl-IsoFind} --- a package for discovering spati
 \begin{minipage}[c]{0.57\textwidth}
 \begin{itemize}
   \item \textbf{Barcode indexing:} 500M barcodes indexed in 10 minutes;
-  \item \textbf{Read processing:} 60M reads/h (10M reads/h with
-        de-concatenation).
+  \item \textbf{Read processing}
+  \begin{itemize}
+      \item No deconcatenation: 60M reads/h 
+      \item With deconcatenation: 10M reads/h
+  \end{itemize}
 \end{itemize}
 \end{minipage}
 
@@ -245,13 +248,7 @@ reproducibly across platforms and protocols.
 \section{Acknowledgements}
 \justifying
 \footnotesize
-% TODO: fill in grant acknowledgements below
-[GRANT ACKNOWLEDGEMENTS PLACEHOLDER --- funding agencies and grant numbers]
-
-This poster was formatted and compiled using Claude AI. \\
-
-Software: \texttt{github.com/ablab/IsoQuant} \quad
-\texttt{github.com/tilgnerlab/Spl-IsoFind}
+This work was supported by European Union (European Research Council, SCALEBIO, 101169716), Research Council of Finland grants No. 322595, 346968, 358744, MIRA R35 GM152101-01, Brain Initiative grant 1RF1MH121267-01, NIDA U01 DA053625-01, Cure Alzheimer’s fund.
 
 \vspace{0.5em}
 \printbibliography[heading=none]
