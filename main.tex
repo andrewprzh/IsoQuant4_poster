@@ -29,15 +29,15 @@
 % QR codes to the right of the title
 \titleright{%
   \begin{minipage}[t]{0.062\paperwidth}\centering
-      \qrcode[height=4.2cm]{https://github.com/ablab/IsoQuant}\\[1ex]
+      \qrcode[height=4.8cm]{https://github.com/ablab/IsoQuant}\\[1ex]
       {\scriptsize\bfseries IsoQuant}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.062\paperwidth}\centering
-      \qrcode[height=4.2cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1ex]
+      \qrcode[height=4.8cm]{https://github.com/tilgnerlab/Spl-IsoFind}\\[1ex]
       {\scriptsize\bfseries Spl-IsoFind}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.062\paperwidth}\centering
-      \qrcode[height=4.2cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1ex]
+      \qrcode[height=4.8cm]{https://doi.org/10.1038/s41592-026-03211-w}\\[1ex]
       {\scriptsize\bfseries Paper}
   \end{minipage}%
 }
@@ -84,6 +84,8 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
 
 \section{IsoQuant4 features}
 \justifying
+\hspace*{1cm}% shift the list right
+\begin{minipage}{\dimexpr\textwidth-1cm}
 \begin{itemize}
   \item Feature quantification 
   \begin{itemize}
@@ -105,6 +107,7 @@ long-read RNA-seq data and \textbf{\mbox{Spl-IsoFind}} --- a package for discove
   \item Poly(A) site and TSS detection
   \item Fusion gene discovery
 \end{itemize}
+\end{minipage}
 
 \section{IsoQuant4 pipeline}
 \justifying
@@ -160,6 +163,7 @@ Simulated ONT reads, 3.8\% error rate.
 \begin{minipage}[t]{0.46\textwidth}
 \begin{table}
     \centering
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{l c c}
     \toprule
         \textbf{Stereo-seq} & \textbf{Precision} & \textbf{Recall} \\
@@ -174,6 +178,7 @@ Simulated ONT reads, 3.8\% error rate.
 \begin{minipage}[t]{0.52\textwidth}
 \begin{table}
     \centering
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{l l c c}
     \toprule
         \textbf{Visium HD} & & \textbf{Precision} & \textbf{Recall} \\
